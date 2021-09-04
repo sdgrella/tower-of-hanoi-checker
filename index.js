@@ -52,10 +52,17 @@ function placeFileContent(target, file) {
             winable = false;
           }
         }
+        function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
 
         // Checks each command for invalid characters
         for (let j = 0; j < commands[i].length; j++) {
           if (isNaN(commands[i][j])) {
+            document.querySelector(".result").innerHTML = "NO";
+            winable = false;
+          }
+        }
+        for (let j = 0; j < commands[i].length; j++) {
+          if (!isNumber(commands[i][j])) {
             document.querySelector(".result").innerHTML = "NO";
             winable = false;
           }
@@ -67,6 +74,11 @@ function placeFileContent(target, file) {
         }
 
         if (isNaN(commands[commands.length - 1])) {
+          document.querySelector(".result").innerHTML = "NO";
+          winable = false;
+        }
+        
+        if (!isNumber(commands[commands.length - 1])) {
           document.querySelector(".result").innerHTML = "NO";
           winable = false;
         }
