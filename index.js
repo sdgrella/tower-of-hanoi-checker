@@ -16,7 +16,7 @@ function placeFileContent(target, file) {
 
       const numberOfDisks = Number(userInput[0]);
 
-      //Gets 
+      //Gets all commands except for the first one (number of disks)
       const commands = userInput.splice(1, userInput.length);
 
       //Creates 3 pegs for us to move the discs around based on user input file
