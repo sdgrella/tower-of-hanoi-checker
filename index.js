@@ -7,7 +7,6 @@ function getFile(event) {
   }
 }
 
-
 function placeFileContent(target, file) {
   readFileContent(file)
     .then((content) => {
@@ -16,7 +15,7 @@ function placeFileContent(target, file) {
 
       const numberOfDisks = Number(userInput[0]);
 
-      //Gets 
+      //Gets all commands from userInput except for the first one (numberofDisks)
       const commands = userInput.splice(1, userInput.length);
 
       //Creates 3 pegs for us to move the discs around based on user input file
@@ -53,12 +52,37 @@ function placeFileContent(target, file) {
             winable = false;
           }
         }
-        ////////////////////////////////////////
 
-        // if (i === commands.length) {
-        //   winable[false]
-        // }
+        // Checks each command for invalid characters
+        for (let j = 0; j < commands[i].length; j++) {
+          if (isNaN(commands[i][j])) {
+            document.querySelector(".result").innerHTML = "NO";
+            winable = false;
+          }
+        }
 
+        if (toString(commands[i]).includes(NaN)) {
+          document.querySelector(".result").innerHTML = "NO";
+          winable = false;
+        }
+
+        if (isNaN(commands[commands.length - 1])) {
+          document.querySelector(".result").innerHTML = "NO";
+          winable = false;
+        }
+
+        //Disqualifies users who try taking a disk from a peg with no discs on it
+        if (
+          pegs[0].includes(undefined) ||
+          pegs[1].includes(undefined) ||
+          pegs[2].includes(undefined)
+        ) {
+          document.querySelector(".result").innerHTML = "NO";
+          winable = false
+        }
+
+
+        //Check for a possible win
         if (
           winable &&
           (pegs[1].length === numberOfDisks || pegs[2].length === numberOfDisks)
@@ -70,7 +94,7 @@ function placeFileContent(target, file) {
           pegs[2].length < numberOfDisks
         ) {
           document.querySelector(".result").innerHTML = "NO";
-        }
+        } 
 
         console.log("IS winable?" + winable);
       }
@@ -91,5 +115,3 @@ function readFileContent(file) {
     reader.readAsText(file);
   });
 }
-
-// console.log(readFileContent());
