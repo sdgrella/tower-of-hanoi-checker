@@ -61,12 +61,6 @@ function placeFileContent(target, file) {
             winable = false;
           }
         }
-        for (let j = 0; j < commands[i].length; j++) {
-          if (!isNumber(commands[i][j])) {
-            document.querySelector(".result").innerHTML = "NO";
-            winable = false;
-          }
-        }
 
         if (toString(commands[i]).includes(NaN)) {
           document.querySelector(".result").innerHTML = "NO";
